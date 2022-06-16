@@ -1,5 +1,10 @@
-from .genre import Genre
-
+from .genre import GenreModel
+from .director import DirectorModel
+from .movie import MovieModel
+from .user import UserModel
 __all__ = [
-    "Genre",
+    "GenreModel",
+    "DirectorModel",
+    "MovieModel",
+    "UserModel"
 ]
