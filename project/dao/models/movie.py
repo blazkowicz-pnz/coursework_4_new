@@ -11,11 +11,11 @@ class MovieModel(BaseMixin, db.Model):
     trailer = db.Column(db.String(255), nullable=False)
     year = db.Column(db.Integer, nullable=False)
     rating = db.Column(db.Float, nullable=False)
-    genre_id = db.Column(db.Integer, db.ForeignKey(GenreModel.id), nullable=False)
-    director_id = db.Column(db.Integer, db.ForeignKey(DirectorModel.id), nullable=False)
+    genre_id = db.Column(db.Integer, db.ForeignKey("genre.id"), nullable=False)
+    director_id = db.Column(db.Integer, db.ForeignKey("director.id"), nullable=False)
 
-    genre = db.relationship(GenreModel)
-    director = db.relationship(DirectorModel)
+    genre = db.relationship("GenreModel")
+    director = db.relationship("DirectorModel")
 
     def __repr__(self):
         return f"<Movie '{self.title.title()}'>"

@@ -1,6 +1,6 @@
 import pytest
 
-from project.dao.models import Genre
+from project.dao.models import GenreModel
 
 
 class TestGenresView:
@@ -8,7 +8,7 @@ class TestGenresView:
 
     @pytest.fixture
     def genre(self, db):
-        g = Genre(name="Боевик")
+        g = GenreModel(name="Боевик")
         db.session.add(g)
         db.session.commit()
         return g
@@ -26,7 +26,7 @@ class TestGenreView:
 
     @pytest.fixture
     def genre(self, db):
-        g = Genre(name="Боевик")
+        g = GenreModel(name="Боевик")
         db.session.add(g)
         db.session.commit()
         return g

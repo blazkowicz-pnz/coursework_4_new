@@ -1,5 +1,6 @@
 from project.dao import MovieDAO
 from project.schemas.movie import MovieSchema
+from project.exceptions import MovieNotFound
 
 
 class MoviesService:
@@ -8,8 +9,16 @@ class MoviesService:
 
     def get_item_by_id(self, m_id: int):
         movie = self.movie_dao.get_by_id(m_id)
+        if not movie:
+            raise MovieNotFound
         return MovieSchema().dump(movie)
 
-    def get_all_movies(self):
-        movies = self.movie_dao.get_all()
+    def get_all_movies(self, filters):
+        if filters.get("page"):
+            movies = self.movie_dao.get_all_by_page(filters["page"])
+        elif filters.get("status") == "new":
+            movies = self.movie_dao.get_all_by_status()
+        else:
+            movies = self.movie_dao.get_all()
         return MovieSchema(many=True).dump(movies)
+

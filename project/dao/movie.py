@@ -1,4 +1,6 @@
+from sqlalchemy import desc
 from project.dao.models import MovieModel
+from project.config import BaseConfig
 
 
 
@@ -11,3 +13,10 @@ class MovieDAO:
 
     def get_all(self):
         return self.session.query(MovieModel).all()
+
+    def get_all_by_status(self):
+        return self.session.query(MovieModel).order_by(desc("year")).all()
+
+    def get_all_by_page(self, page):
+        return self.session.query(MovieModel).limit(BaseConfig.ITEMS_PER_PAGE).offset(BaseConfig.ITEMS_PER_PAGE * page - BaseConfig.ITEMS_PER_PAGE)
+

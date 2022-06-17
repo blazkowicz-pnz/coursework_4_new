@@ -1,4 +1,5 @@
 from project.dao.models import GenreModel
+from project.config import BaseConfig
 
 
 class GenreDAO:
@@ -10,3 +11,6 @@ class GenreDAO:
 
     def get_all(self):
         return self.session.query(GenreModel).all()
+
+    def get_all_by_page(self, page):
+        return self.session.query(GenreModel).limit(BaseConfig.ITEMS_PER_PAGE).offset(BaseConfig.ITEMS_PER_PAGE * page - BaseConfig.ITEMS_PER_PAGE)

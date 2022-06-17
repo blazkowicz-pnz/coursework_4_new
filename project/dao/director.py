@@ -1,4 +1,5 @@
 from project.dao.models import DirectorModel
+from project.config import BaseConfig
 
 class DirectorDAO:
     def __init__(self, session):
@@ -9,3 +10,6 @@ class DirectorDAO:
 
     def get_all(self):
         return self.session.query(DirectorModel).all()
+
+    def get_all_by_page(self, page):
+        return self.session.query(DirectorModel).limit(BaseConfig.ITEMS_PER_PAGE).offset(BaseConfig.ITEMS_PER_PAGE * page - BaseConfig.ITEMS_PER_PAGE)

@@ -7,8 +7,9 @@ class UserDAO:
 
     def get_user_by_id(self, uid: int):
         user = self.session.query(UserModel).filter(UserModel.id == uid).one_or_none()
-        return UserSchema().dump(user)
+        return user
 
-    def update(self):
-        ...
+    def update(self, user_data):
+        self.session.add(user_data)
+        self.session.commit()
 
